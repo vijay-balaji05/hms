@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Medical Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #2c5282;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info, .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h2, .contact-form h2 {
+            color: #2c5282;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: #2c5282;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #2d3748;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 1rem;
+            color: green;
+            font-weight: bold;
+        }
+
+        .emergency-notice {
+            background-color: #fed7d7;
+            border: 1px solid #fc8181;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            color: #c53030;
+        }
+
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Banner Styles */
+        .banner {
+            background: linear-gradient(135deg, #0047AB, #004080);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner header h1 {
+            font-size: 32px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .banner ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .banner a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .banner a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .banner ul {
+                margin-top: 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBgyU9x5ZkyfoG80AyOSTCxq0l4tdll_9s",
+            authDomain: "sample-9625e.firebaseapp.com",
+            projectId: "sample-9625e",
+            storageBucket: "sample-9625e.appspot.com",
+            messagingSenderId: "215773941394",
+            appId: "1:215773941394:web:f4687732d65fe86719204b",
+            measurementId: "G-KDP8ZCXPN3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function submitFeedback(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name || !email || !message) {
+                alert("All fields are required.");
+                return;
+            }
+
+            try {
+                await setDoc(doc(db, "feedback", name), {
+                    name,
+                    email,
+                    message,
+                    timestamp: new Date().toISOString()
+                });
+
+                document.getElementById("successMessage").style.display = "block";
+                document.getElementById("feedbackForm").reset();
+            } catch (error) {
+                console.error("Error submitting feedback:", error);
+                alert("An error occurred while submitting feedback. Please try again.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("feedbackForm").addEventListener("submit", submitFeedback);
+        });
+    </script>
+</head>
+<body>
+    <!-- Banner -->
+    <div class="banner">
+        <header>
+            <h1>BALAJI Hospital</h1>
+        </header>
+        <ul>
+            <li><a href="Register.html">Register an Application</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="medicines.html">Medicines</a></li>
+        </ul>
+    </div>
+
+    <header class="header">
+        <h1>Contact Us</h1>
+    </header>
+
+    <div class="container">
+        <div class="emergency-notice">
+            <strong>For Medical Emergencies:</strong> Please call 108 or visit your nearest emergency room immediately.
+        </div>
+
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <div>
+                    <h3>Address</h3>
+                    <p>108/7 Medavakkam<br>Chennai, Tamilnadu 600045</p>
+                </div>
+                <div>
+                    <h3>Phone</h3>
+                    <p>Main: (+91) 6381843894 <br>Appointments: (555) 123-4568</p>
+                </div>
+                <div>
+                    <h3>Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 1:00 PM<br>Sunday: Closed</p>
+                </div>
+                <div>
+                    <h3>Email</h3>
+                    <p>221ca017@kongunaducollege.ac.in</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Submit Your Feedback</h2>
+                <form id="feedbackForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    
+                    <button type="submit" class="submit-btn">Submit Feedback</button>
+                </form>
+                <p id="successMessage" class="success-message">Thanks for your feedback!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

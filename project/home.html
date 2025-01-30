@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, #0047AB, #004080);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner header h1 {
+            font-size: 32px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .banner ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .banner a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .banner a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .register-btn {
+            background-color: #da2765;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background-color: #c01f56;
+            transform: translateY(-2px);
+        }
+
+        .image {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            padding: 20px;
+            background-color: whitesmoke;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .image img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .infor header {
+            padding-left: 50px;
+            color: #0047AB;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .infor p {
+            display: flex;
+            justify-content: center;
+            padding-left: 50px;
+            color: #da2765;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .auth-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn {
+            background-color: #0047AB;
+            color: white;
+        }
+
+        .signup-btn {
+            background-color: #da2765;
+            color: white;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .banner ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .banner a {
+                font-size: 14px;
+            }
+
+            .banner header h1 {
+                font-size: 28px;
+            }
+
+            .infor p {
+                padding-left: 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <header>
+            <h1>BALAJI Hospital</h1>
+        </header>
+        <ul>
+            <li><a href="Register.html" class="register-btn" onclick="openRegisterModal()">Register</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="medicines.html">Medicines</a></li>
+        </ul>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 20px;">Choose an Option</h2>
+            <div class="auth-buttons">
+                <button class="auth-button login-btn" onclick="window.location.href='login.html'">Login</button>
+                <button class="auth-button signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="image">
+        <img src="images/man.webp" alt="Man 1">
+        <img src="images/man2.jpg" alt="Man 2">
+        <img src="images/man3.webp" alt="Man 3">
+    </div>
+
+    <div class="infor">
+        <header>EXPLORING THE INFORMATION ABOUT HOSPITAL</header>
+        <p>
+            Hospitals are critical institutions in the healthcare system, providing essential medical services to communities and ensuring the well-being of individuals. They are designed to deliver a wide range of healthcare services, from emergency care to specialized treatments, diagnostics, and preventive medicine. Hospitals play a pivotal role in saving lives, managing chronic diseases, and promoting public health. Hospitals are also hubs for innovation and education. Many are affiliated with medical colleges and research institutions, contributing to advancements in medical science and the training of healthcare professionals.
+        </p>
+        <p>
+            The management of hospitals involves numerous complexities. Hospital management systems are used to streamline operations, such as patient admissions, appointment scheduling, billing, inventory management, and staff coordination. These systems ensure that hospitals operate efficiently while maintaining high standards of care and patient safety. Moreover, hospitals emphasize stringent hygiene protocols, patient privacy, and ethical practices to build trust and ensure optimal outcomes.
+        </p>
+    </div>
+
+    <script>
+        function openRegisterModal() {
+            document.getElementById('registerModal').style.display = 'block';
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('registerModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
