@@ -12,9 +12,9 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background-color: #f9f9f9;
+            background-color: #f4f4f9;
             color: #333;
         }
 
@@ -35,16 +35,12 @@
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             font-weight: 700;
-            margin: 0;
         }
 
         .banner ul {
             list-style: none;
             display: flex;
             gap: 30px;
-            margin: 0;
-            padding: 0;
-            align-items: center;
         }
 
         .banner a {
@@ -63,60 +59,105 @@
         }
 
         .register-btn {
-            background-color: #da2765;
             padding: 10px 20px;
             border-radius: 25px;
             color: white;
+            border: 1px solid white;
             font-weight: bold;
             transition: all 0.3s ease;
         }
 
         .register-btn:hover {
-            background-color: #c01f56;
             transform: translateY(-2px);
+            background-color: white;
+            color: #004080;
         }
 
-        .image {
+        /* Styling for Image Slider */
+        .slider-container {
+            width: 60%;height: 350px;
+            position: relative;
+            margin: 40px auto;
+            padding: 5px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            padding: 20px;
-            background-color: whitesmoke;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            border-radius: 8px;
+            transition: transform 0.5s ease;
         }
 
-        .image img {
-            width: 100%;
-            max-width: 350px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .slide {
+            min-width: 100%;
+            height: 400px;
+            object-fit: cover;
         }
 
-        .image img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
         }
 
-        .infor header {
-            padding-left: 50px;
-            color: #0047AB;
-            font-size: 20px;
-            font-weight: bold;
-        }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
 
-        .infor p {
-            display: flex;
-            justify-content: center;
-            padding-left: 50px;
-            color: #da2765;
-            font-size: 16px;
-            line-height: 1.8;
-        }
+        /* Styling for Information Section */
+        .infor {
+    margin: 40px;
+    text-align: left;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    line-height: 1.8;
+}
+
+.infor header {
+    color: #0047AB;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #0047AB;
+    padding-bottom: 10px;
+}
+
+.infor ul {
+    list-style: none;
+    padding: 0;
+}
+
+.infor li {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 20px;
+}
+
+.infor li:before {
+    content: '•';
+    color: #da2765;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    font-size: 24px;
+}
+
+.infor p {
+    margin: 20px 0;
+}
 
         /* Modal Styles */
         .modal {
@@ -210,7 +251,7 @@
         <ul>
             <li><a href="Register.html" class="register-btn" onclick="openRegisterModal()">Register</a></li>
             <li><a href="about.html">About Us</a></li>
-            <li><a href="medicines.html">Medicines</a></li>
+            <li><a href="medicine.html">Medicines</a></li>
         </ul>
     </div>
 
@@ -226,38 +267,51 @@
         </div>
     </div>
 
-    <div class="image">
-        <img src="images/man.webp" alt="Man 1">
-        <img src="images/man2.jpg" alt="Man 2">
-        <img src="images/man3.webp" alt="Man 3">
+    <div class="slider-container">
+        <div class="slider" id="imageSlider">
+            <img src="images/man.webp" alt="Slide 1" class="slide">
+            <img src="images/man2.jpg" alt="Slide 2" class="slide">
+            <img src="images/man3.webp" alt="Slide 3" class="slide">
+            <img src="images/img.jpg" alt="Slide 4" class="slide">
+            <img src="images/02182795596c858768f19c4f2f7200cb.jpg" alt="Slide 5" class="slide">
+        </div>
+        <button class="slider-btn prev-btn" onclick="changeSlide(-1)"> ❮</button>
+        <button class="slider-btn next-btn" onclick="changeSlide(1)"> ❯</button>
     </div>
 
     <div class="infor">
         <header>EXPLORING THE INFORMATION ABOUT HOSPITAL</header>
         <p>
-            Hospitals are critical institutions in the healthcare system, providing essential medical services to communities and ensuring the well-being of individuals. They are designed to deliver a wide range of healthcare services, from emergency care to specialized treatments, diagnostics, and preventive medicine. Hospitals play a pivotal role in saving lives, managing chronic diseases, and promoting public health. Hospitals are also hubs for innovation and education. Many are affiliated with medical colleges and research institutions, contributing to advancements in medical science and the training of healthcare professionals.
-        </p>
-        <p>
-            The management of hospitals involves numerous complexities. Hospital management systems are used to streamline operations, such as patient admissions, appointment scheduling, billing, inventory management, and staff coordination. These systems ensure that hospitals operate efficiently while maintaining high standards of care and patient safety. Moreover, hospitals emphasize stringent hygiene protocols, patient privacy, and ethical practices to build trust and ensure optimal outcomes.
+            <ul>
+                <li> Our services range from emergency care to specialized treatments, diagnostics, and preventive medicine. We are dedicated to patient-centered care, innovation, and excellence. Your health and well-being are our top priorities. Thank you for choosing us!</li>
+                <li>  The management of hospitals involves numerous complexities, Hospital management systems are used to streamline operations, such as patient admissions, appointment scheduling, billing, inventory management, and staff coordination. </li>
+                <li> These systems ensure that hospitals operate efficiently while maintaining high standards of care and patient safety. Moreover, hospitals emphasize stringent hygiene protocols, patient privacy, and ethical practices to build trust and ensure optimal outcomes.</li>
+             </ul>
+           
         </p>
     </div>
-
     <script>
-        function openRegisterModal() {
-            document.getElementById('registerModal').style.display = 'block';
+        // scripting for image sliding
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slider = document.getElementById('imageSlider');
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
         }
 
-        function closeRegisterModal() {
-            document.getElementById('registerModal').style.display = 'none';
+        function autoSlide() {
+            changeSlide(1);
         }
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('registerModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
+        setInterval(autoSlide, 1500); // Change slide every 1.5 seconds
     </script>
 </body>
 </html>
+
+

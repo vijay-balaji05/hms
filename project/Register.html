@@ -15,21 +15,49 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #00b4db, #0083b0);
             display: flex;
             justify-content: center;
+            background-color: #00b4db;
             align-items: center;
             padding: 20px;
         }
 
+        /* Loading Overlay Styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #00b4db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: #e0e0e0;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             padding: 40px;
             width: 100%;
             max-width: 700px;
-            backdrop-filter: blur(10px);
+            position: relative;
         }
 
         .login-container {
@@ -178,8 +206,17 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        // Loading functions
+        window.showLoading = function() {
+            document.querySelector('.loading-overlay').style.display = 'flex';
+        }
+
+        window.hideLoading = function() {
+            document.querySelector('.loading-overlay').style.display = 'none';
+        }
+
         // Show/Hide forms
-        window.showForm = function (formId) {
+        window.showForm = function(formId) {
             document.querySelectorAll('.container').forEach(container => container.classList.add('hidden'));
             document.getElementById(formId).classList.remove('hidden');
             document.getElementById('message').className = '';
@@ -189,6 +226,8 @@
         // Signup function
         async function handleSignup(event) {
             event.preventDefault();
+            showLoading();
+            
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
             const role = document.querySelector('input[name="role"]:checked').value;
@@ -198,7 +237,6 @@
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
-                // Store user role in Firestore
                 await addDoc(collection(db, "users"), {
                     uid: user.uid,
                     email: email,
@@ -211,13 +249,16 @@
             } catch (error) {
                 message.textContent = error.message;
                 message.className = 'error';
+            } finally {
+                hideLoading();
             }
         }
 
         // Login function
-        // Login function
         async function handleLogin(event) {
             event.preventDefault();
+            showLoading();
+            
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             const message = document.getElementById('message');
@@ -229,9 +270,7 @@
                 message.textContent = 'Login successful!';
                 message.className = 'success';
 
-                if (email == 'admin@gmail.com') {
-                    console.log('Admin login detected, redirecting...');
-                    // Use setTimeout to ensure the success message is shown
+                if (email === 'admin@gmail.com') {
                     setTimeout(() => {
                         window.location.replace('load.html');
                     }, 1000);
@@ -242,14 +281,17 @@
                 console.error('Login error:', error);
                 message.textContent = 'Invalid email or password';
                 message.className = 'error';
+            } finally {
+                hideLoading();
             }
         }
 
         // Register patient function
         async function registerPatient(event) {
             event.preventDefault();
+            showLoading();
+            
             const message = document.getElementById('message');
-
             const name = document.getElementById('name').value;
             const age = document.getElementById('age').value;
             const gender = document.querySelector('input[name="gender"]:checked').value;
@@ -267,12 +309,18 @@
             } catch (error) {
                 message.textContent = 'An error occurred. Please try again.';
                 message.className = 'error';
+            } finally {
+                hideLoading();
             }
         }
 
         // Logout function
-        window.handleLogout = function () {
-            showForm('loginForm');
+        window.handleLogout = function() {
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                showForm('loginForm');
+            }, 500);
         }
 
         // Add event listeners when DOM is loaded
@@ -285,6 +333,11 @@
 </head>
 
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
     <!-- Initial Choice -->
     <div id="initialChoice" class="container login-container">
         <h1>Welcome to Hospital Management</h1>
