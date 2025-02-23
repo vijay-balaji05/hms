@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BALAJI Hospital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3182ce;
+            --secondary-color: #2c5282;
+            --background-light: #f0f4f8;
+            --text-dark: #2d3748;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .navbar-nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .contact-info, .contact-form {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h2, .contact-form h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info h2 i, .contact-form h2 i {
+            color: var(--primary-color);
+        }
+
+        .contact-info div {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(49,132,206,0.1);
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .emergency-notice {
+            background-color: #fed7d7;
+            border: 1px solid #fc8181;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .emergency-notice i {
+            color: #e53e3e;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navbar-nav {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <i class="fas fa-hospital"></i>
+            BALAJI Hospital
+        </a>
+        <ul class="navbar-nav">
+            <li><a href="Register.html">Register</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="medicine.html">Medicines</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Emergency Notice -->
+        <div class="emergency-notice">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>For Medical Emergencies:</strong> Please call 108 or visit your nearest emergency hospital immediately.
+        </div>
+
+        <div class="contact-section">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h2><i class="fas fa-info-circle"></i>Contact Information</h2>
+                <div>
+                    <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                    <p>108/7 Medavakkam, Chennai, Tamilnadu 600045</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-phone"></i> Phone</h3>
+                    <p>Main: (+91) 6381843894<br>Appointments: (555) 123-4568</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-clock"></i> Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 1:00 PM<br>Sunday: Closed</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p>221ca017@kongunaducollege.ac.in</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2><i class="fas fa-comment-medical"></i>Submit Feedback</h2>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Send Feedback</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBgyU9x5ZkyfoG80AyOSTCxq0l4tdll_9s",
+            authDomain: "sample-9625e.firebaseapp.com",
+            projectId: "sample-9625e",
+            storageBucket: "sample-9625e.appspot.com",
+            messagingSenderId: "215773941394",
+            appId: "1:215773941394:web:f4687732d65fe86719204b",
+            measurementId: "G-KDP8ZCXPN3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function submitFeedback(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name || !email || !message) {
+                alert("All fields are required.");
+                return;
+            }
+
+            try {
+                await setDoc(doc(db, "feedback", name), {
+                    name,
+                    email,
+                    message,
+                    timestamp: new Date().toISOString()
+                });
+
+                alert("Feedback submitted successfully!");
+                document.getElementById("feedbackForm").reset();
+            } catch (error) {
+                console.error("Error submitting feedback:", error);
+                alert("An error occurred while submitting feedback. Please try again.");
+            }
+        }
+
+        document.getElementById("feedbackForm").addEventListener("submit", submitFeedback);
+    </script>
+</body>
+</html>
